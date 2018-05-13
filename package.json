@@ -1,0 +1,15 @@
+{
+	"name" : "NodeTest",
+	"version" : "0.0.1",
+	"description" : "first node test",
+	"author" : "Sara Kalinic'",
+	"main" : "node.js",
+	"scripts" : {
+		"start" : "node node.js"
+	},
+	"engines" : {
+		"node" : "6.10.3"
+	},
+	"dependencies" : {
+	}
+}
