@@ -11,7 +11,7 @@ var Server;
     server.addListener("request", handleRequest);
     server.listen(port);
     function handleListen() {
-        console.log("Ich höre?");
+        console.log("Ich h�re?");
     }
     function handleRequest(_request, _response) {
         console.log("Ich h�re Stimmen!");

@@ -16,7 +16,7 @@ namespace Server {
     server.listen(port);
 
     function handleListen(): void {
-        console.log("Ich hÃ¶re?");
+        console.log("Ich höre?");
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
