@@ -2,13 +2,13 @@
 	"name" : "NodeTest",
 	"version" : "0.0.1",
 	"description" : "first node test",
-	"author" : "Sara Kalinic'",
-	"main" : "node.js",
+	"author" : "Michelle Münch'",
+	"main" : "Server.js",
 	"scripts" : {
-		"start" : "node node.js"
+		"start" : "node Server.js"
 	},
 	"engines" : {
-		"node" : "6.10.3"
+		"node" : "6.11.1"
 	},
 	"dependencies" : {
 	}
