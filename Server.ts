@@ -16,11 +16,11 @@ namespace Server {
     server.listen(port);
 
     function handleListen(): void {
-        console.log("Ich höre?");
+        console.log("Ich hï¿½re?");
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
-        console.log("Ich höre Stimmen!");
+        console.log("Ich hÃ¶re Stimmen!");
 
         let query: AssocStringString = Url.parse(_request.url, true).query;
         let a: number = parseInt(query["a"]);
@@ -32,7 +32,7 @@ namespace Server {
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
-        _response.write("Ich habe dich gehört<br/>");
+        _response.write("Ich habe dich gehÃ¶rt<br/>");
         _response.write("Das Ergebnis ist: " + (a + b));
 
         _response.end();

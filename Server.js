@@ -14,7 +14,7 @@ var Server;
         console.log("Ich h�re?");
     }
     function handleRequest(_request, _response) {
-        console.log("Ich h�re Stimmen!");
+        console.log("Ich höre Stimmen!");
         let query = Url.parse(_request.url, true).query;
         let a = parseInt(query["a"]);
         let b = parseInt(query["b"]);
@@ -22,7 +22,7 @@ var Server;
             console.log(query[key]);
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
-        _response.write("Ich habe dich geh�rt<br/>");
+        _response.write("Ich habe dich gehört<br/>");
         _response.write("Das Ergebnis ist: " + (a + b));
         _response.end();
     }
