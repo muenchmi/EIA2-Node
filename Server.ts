@@ -17,7 +17,7 @@ namespace Server {
         studiengang: string;
     }
 
-    // Struktur des homogenen assoziativen Arrays, bei dem ein Datensatz der Matrikelnummer zugeordnet ist
+    // Struktur des homogenen assoziativen Arrays, bei dem ein Datensatz der Matrikelnummer zugeordnet 
     interface Studis {
         [matrikel: string]: Studi;
     }
