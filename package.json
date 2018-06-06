@@ -1,6 +1,6 @@
 {
 	"name" : "NodeTest",
-	"version" : "0.0.2",
+	"version" : "0.0.1",
 	"description" : "first node test",
 	"author" : "Michelle M�nch'",
 	"main" : "Server.js",
