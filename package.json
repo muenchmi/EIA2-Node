@@ -2,7 +2,7 @@
 	"name" : "NodeTest",
 	"version" : "0.0.1",
 	"description" : "first node test",
-	"author" : "Michelle Münch'",
+	"author" : "Michelle MÃ¼nch'",
 	"main" : "Server.js",
 	"scripts" : {
 		"start" : "node Server.js"
@@ -11,5 +11,6 @@
 		"node" : "6.11.1"
 	},
 	"dependencies" : {
+	"mongodb": "^3.0.1"
 	}
 }
