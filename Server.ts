@@ -1,40 +1,61 @@
 import * as Http from "http";
 import * as Url from "url";
+import Database = require("./database");
 
-namespace Server {
-    interface AssocStringString {
-        [key: string]: string;
+
+let port: number = process.env.PORT;
+if (port == undefined)
+    port = 8100;
+
+let server: Http.Server = Http.createServer();
+server.addListener("listening", handleListen);
+server.addListener("request", handleRequest);
+server.listen(port);
+
+
+
+function handleListen(): void {
+    console.log("Listening on port: " + port);
+}
+
+function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
+    console.log("Request received");
+    let query: AssocStringString = Url.parse(_request.url, true).query;
+    var command: string = query["command"];
+    
+    
+    
+    switch (command) { 
+        case "insert":
+            let student: StudentData = {
+                name: query["name"],
+                firstname: query["firstname"],
+                matrikel: parseInt(query["matrikel"])
+            };
+            Database.insert(student); 
+            respond(_response, "storing data");
+            break;
+        case "find":
+            Database.refresh(function(json: string): void { 
+                respond(_response, json);
+            });
+            break;
+            case "search":
+             if (query["matrikel"] == "") {
+                Database.refresh(function(json: string): void {
+                    respond(_response, json);
+                });
+                 }
+            break;
+        default:
+            respond(_response, "unknown command: " + command);
+            break;
     }
+}
 
-    let port: number = process.env.PORT;
-    if (port == undefined)
-        port = 8100;
-
-    let server: Http.Server = Http.createServer();
-    server.addListener("listening", handleListen);
-    server.addListener("request", handleRequest);
-    server.listen(port);
-
-    function handleListen(): void {
-        console.log("Ich h�re?");
-    }
-
-    function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
-        console.log("Ich höre Stimmen!");
-
-        let query: AssocStringString = Url.parse(_request.url, true).query;
-        let a: number = parseInt(query["a"]);
-        let b: number = parseInt(query["b"]);
-
-        for (let key in query) 
-            console.log(query[key]);
-
-        _response.setHeader("content-type", "text/html; charset=utf-8");
-        _response.setHeader("Access-Control-Allow-Origin", "*");
-
-        _response.write("Ich habe dich gehört<br/>");
-        _response.write("Das Ergebnis ist: " + (a + b));
-
-        _response.end();
-    }
+function respond(_response: Http.ServerResponse, _text: string): void {
+    _response.setHeader("Access-Control-Allow-Origin", "*");
+    _response.setHeader("content-type", "text/html; charset=utf-8");
+    _response.write(_text);
+    _response.end();
 }
