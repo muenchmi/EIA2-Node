@@ -2,8 +2,11 @@ interface AssocStringString {
     [key: string]: string;
 }
 
-interface StudentData {
-    name: string;
-    firstname: string;
-    matrikel: number;
-}
+ interface Studi {
+        name: string;
+        firstname: string;
+        matrikel: number;
+        age: number;
+        gender: boolean;
+        studiengang: string;
+    }

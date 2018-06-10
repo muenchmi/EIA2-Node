@@ -22,30 +22,25 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
     console.log("Request received");
     let query: AssocStringString = Url.parse(_request.url, true).query;
     var command: string = query["command"];
-    
-    
-    
-    switch (command) { 
+
+
+
+    switch (command) {
         case "insert":
-            let student: StudentData = {
-                name: query["name"],
-                firstname: query["firstname"],
-                matrikel: parseInt(query["matrikel"])
-            };
-            Database.insert(student); 
+            insert(query, _response);
             respond(_response, "storing data");
             break;
         case "find":
-            Database.refresh(function(json: string): void { 
+            Database.refresh(function(json: string): void {
                 respond(_response, json);
             });
             break;
-            case "search":
-             if (query["matrikel"] == "") {
+        case "search":
+            if (query["matrikel"] == "") {
                 Database.refresh(function(json: string): void {
                     respond(_response, json);
                 });
-                 }
+            }
             break;
         default:
             respond(_response, "unknown command: " + command);
@@ -58,4 +53,26 @@ function respond(_response: Http.ServerResponse, _text: string): void {
     _response.setHeader("content-type", "text/html; charset=utf-8");
     _response.write(_text);
     _response.end();
+}
+
+function insert(query: AssocStringString, _response: Http.ServerResponse): void {
+    let obj: Studi = JSON.parse(query["data"]);
+    let _name: string = obj.name;
+    let _firstname: string = obj.firstname;
+    let matrikel: string = obj.matrikel.toString();
+    let _age: number = obj.age;
+    let _gender: boolean = obj.gender;
+    let _studiengang: string = obj.studiengang;
+    let studi: Studi;
+    studi = {
+        name: _name,
+        firstname: _firstname,
+        matrikel: parseInt(matrikel),
+        age: _age,
+        gender: _gender,
+        studiengang: _studiengang
+    };
+    //            studiHomoAssoc[matrikel] = studi;
+    _response.write("Daten empfangen");
+    Database.insert(studi);
 }

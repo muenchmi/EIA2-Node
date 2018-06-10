@@ -18,12 +18,7 @@ function handleRequest(_request, _response) {
     var command = query["command"];
     switch (command) {
         case "insert":
-            let student = {
-                name: query["name"],
-                firstname: query["firstname"],
-                matrikel: parseInt(query["matrikel"])
-            };
-            Database.insert(student);
+            insert(query, _response);
             respond(_response, "storing data");
             break;
         case "find":
@@ -48,5 +43,26 @@ function respond(_response, _text) {
     _response.setHeader("content-type", "text/html; charset=utf-8");
     _response.write(_text);
     _response.end();
+}
+function insert(query, _response) {
+    let obj = JSON.parse(query["data"]);
+    let _name = obj.name;
+    let _firstname = obj.firstname;
+    let matrikel = obj.matrikel.toString();
+    let _age = obj.age;
+    let _gender = obj.gender;
+    let _studiengang = obj.studiengang;
+    let studi;
+    studi = {
+        name: _name,
+        firstname: _firstname,
+        matrikel: parseInt(matrikel),
+        age: _age,
+        gender: _gender,
+        studiengang: _studiengang
+    };
+    //            studiHomoAssoc[matrikel] = studi;
+    _response.write("Daten empfangen");
+    Database.insert(studi);
 }
 //# sourceMappingURL=Server.js.map
